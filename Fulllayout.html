@@ -12,6 +12,13 @@
             font-style: normal;
             font-display: swap;
         }
+        @font-face {
+            font-family: "Poppins";
+            src: url("/Poppins-Light.woff2") format("woff2");
+            font-weight: light;
+            font-style: normal;
+            font-display: swap;
+        }
         body {
             font-family: "Poppins", sans-serif;
             display: flex;
@@ -26,18 +33,26 @@
             align-items: flex-start;
             gap: 20px;
         }
-        .calculator {
-            width: 275px;
-            padding: 15px;
+        .box-w-calc {
+            width: 305px;
             border-radius: 15px;
             background-color: rgb(253,246,230);
             border: 5px solid rgb(44,49,42);
             box-shadow: 10px 10px 0px rgba(0, 0, 0);
         }
+        .box-g-calc {
+            position: relative;
+            width: 275px;
+            margin-top: 40px;
+            padding: 15px;
+            border-radius: 13px;
+            background-color: rgb(184,243,215);
+        }
         .tips {
             font-size: 0.875rem;
+            font-weight: bold;
             color: rgba(0, 0, 0, 0.7);
-            background: rgb(253,246,230);
+            background: rgb(253,246,230); 
             padding: 10px;
             border-radius: 10px;
             border: 2px solid rgba(0, 0, 0, 0.5);
@@ -49,19 +64,18 @@
             text-align: right;
             padding: 10px;
             border-radius: 10px;
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 30px;
-            min-height: 80px;
+            min-height: 100px;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
         }
         .current-equation {
-            font-size: 36px;
+            font-size: 2.6rem;
+            font-weight: bold;
         }
         .previous-equation {
-            font-size: 16px;
+            font-weight: light;
+            font-size: 1.3rem;
             color: rgb(145,143,128);
         }
         .buttons {
@@ -74,7 +88,7 @@
             width: 100%;
             height: 100%;
             font-family: "Poppins", sans-serif;
-            font-size: 18px;
+            font-size: 1.125rem;
             font-weight: bold;
             box-shadow: 3px 3px 0px rgba(0, 0, 0);
             background-color:rgb(253,246,230);
@@ -92,7 +106,7 @@
             width: 100%;
             height: 100%;
             font-family: "Poppins", sans-serif;
-            font-size: 18px;
+            font-size: 1.125rem;
             font-weight: bold;
             box-shadow: 3px 3px 0px rgba(0, 0, 0);
             background-color:rgb(253,246,230);
@@ -112,33 +126,37 @@
 </head>
 <body>
     <div class="container">
-        <div class="calculator">
-            <div class="display">
-                <div class="current-equation" id="current-equation">0</div>
-                <div class="previous-equation" id="previous-equation"></div>
-            </div>
-            <div class="buttons">
-                <button onclick="clearAll()">AC</button>
-                <button onclick="insert('%')">%</button>
-                <button onclick="deleteLast()">DEL</button>
-                <button onclick="insert('/')">÷</button>
-                <button onclick="insert('1')">1</button>
-                <button onclick="insert('2')">2</button>
-                <button onclick="insert('3')">3</button>
-                <button onclick="insert('*')">×</button>
-                <button onclick="insert('4')">4</button>
-                <button onclick="insert('5')">5</button>
-                <button onclick="insert('6')">6</button>
-                <button onclick="insert('+')">+</button>
-                <button onclick="insert('7')">7</button>
-                <button onclick="insert('8')">8</button>
-                <button onclick="insert('9')">9</button>
-                <button onclick="insert('-')">-</button>
-            </div>
-            <div class="buttons-down">
-                <button onclick="insert('0')">0</button>
-                <button onclick="insert('.')">,</button>
-                <button onclick="calculate()">=</button>
+        <div class="box-w-calc">
+            <div class="calculator">
+                <div class="display">
+                    <div class="current-equation" id="current-equation">0</div>
+                    <div class="previous-equation" id="previous-equation"></div>
+                </div>
+                <div class="box-g-calc">
+                    <div class="buttons">
+                        <button onclick="clearAll()">AC</button>
+                        <button onclick="insert('%')">%</button>
+                        <button onclick="deleteLast()">DEL</button>
+                        <button onclick="insert('/')">÷</button>
+                        <button onclick="insert('1')">1</button>
+                        <button onclick="insert('2')">2</button>
+                        <button onclick="insert('3')">3</button>
+                        <button onclick="insert('*')">×</button>
+                        <button onclick="insert('4')">4</button>
+                        <button onclick="insert('5')">5</button>
+                        <button onclick="insert('6')">6</button>
+                        <button onclick="insert('+')">+</button>
+                        <button onclick="insert('7')">7</button>
+                        <button onclick="insert('8')">8</button>
+                        <button onclick="insert('9')">9</button>
+                        <button onclick="insert('-')">-</button>
+                    </div>
+                    <div class="buttons-down">
+                        <button onclick="insert('0')">0</button>
+                        <button onclick="insert('.')">,</button>
+                        <button onclick="calculate()">=</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="tips">
@@ -164,7 +182,7 @@
                 calculate();
             }
         });
-
+        
         function insert(num) {
             let current = document.getElementById("current-equation");
             if (current.innerText === "Ошибка") {
@@ -176,7 +194,16 @@
             if (operators.includes(lastChar) && operators.includes(num)) {
                 return;
             }
-    
+            if (num === "%") {
+                let expression = current.innerText;
+                let match = expression.match(/(\d+(?:\.\d+)?)$/);
+            if (match) {
+                let number = parseFloat(match[1]);
+                let newExpression = expression.replace(/\d+(?:\.\d+)?$/, (number / 100).toString());
+                current.innerText = newExpression;
+                return;
+            }
+        }
             if (current.innerText.length < 12) {
                 if (current.innerText === "0" && !operators.includes(num)) {
                     current.innerText = num;

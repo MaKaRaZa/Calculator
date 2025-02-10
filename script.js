@@ -18,11 +18,27 @@ function insert(num) {
     if (current.innerText === "Ошибка") {
         current.innerText = "";
     }
+    let lastChar = current.innerText.slice(-1);
+    let operators = "/*-+.%";
+
+    if (operators.includes(lastChar) && operators.includes(num)) {
+        return;
+    }
+    if (num === "%") {
+        let expression = current.innerText;
+        let match = expression.match(/(\d+(?:\.\d+)?)$/);
+    if (match) {
+        let number = parseFloat(match[1]);
+        let newExpression = expression.replace(/\d+(?:\.\d+)?$/, (number / 100).toString());
+        current.innerText = newExpression;
+        return;
+    }
+}
     if (current.innerText.length < 12) {
-        if (current.innerText === "0") {
+        if (current.innerText === "0" && !operators.includes(num)) {
             current.innerText = num;
         } else {
-            current.innerText += num;
+            current.innerText += num; 
         }
     }
 }
