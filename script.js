@@ -1,19 +1,54 @@
+document.addEventListener("keydown", function(event) {
+    const key = event.key;
+    if (!isNaN(key) || "/*-+.%".includes(key)) {
+        insert(key);
+    } else if (key === "Enter") {
+        calculate();
+    } else if (key === "Backspace") {
+        deleteLast();
+    } else if (key === "Escape") {
+        clearAll();
+    } else if (key === "=") {
+        calculate();
+    }
+});
+
 function insert(num) {
-    let display = document.getElementById("display");
-    if (display.innerText === "0") {
-        display.innerText = num;
-    } else {
-        display.innerText += num;
+    let current = document.getElementById("current-equation");
+    if (current.innerText === "Ошибка") {
+        current.innerText = "";
+    }
+    if (current.innerText.length < 12) {
+        if (current.innerText === "0") {
+            current.innerText = num;
+        } else {
+            current.innerText += num;
+        }
     }
 }
-function clearDisplay() {
-    document.getElementById("display").innerText = "0";
+function clearAll() {
+    document.getElementById("current-equation").innerText = "0";
+    document.getElementById("previous-equation").innerText = "";
+}
+function deleteLast() {
+    let current = document.getElementById("current-equation");
+    if (current.innerText === "Ошибка") {
+        current.innerText = "0";
+        return;
+    }
+    current.innerText = current.innerText.slice(0, -1);
+    if (current.innerText === "") {
+        current.innerText = "0";
+    }
 }
 function calculate() {
-    let display = document.getElementById("display");
+    let current = document.getElementById("current-equation");
+    let previous = document.getElementById("previous-equation");
     try {
-        display.innerText = eval(display.innerText.replace('÷', '/').replace('×', '*'));
+        let result = eval(current.innerText.replace('÷', '/').replace('×', '*'));
+        previous.innerText = current.innerText;
+        current.innerText = result;
     } catch {
-        display.innerText = "Ошибка";
+        current.innerText = "Ошибка";
     }
 }

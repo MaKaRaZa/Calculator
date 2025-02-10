@@ -1,45 +1,81 @@
+@font-face {
+    font-family: "Poppins";
+    src: url("/Poppins-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
 body {
+    font-family: "Poppins", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #eef4e9;
+    background-color: rgb(253,246,230);
 }
-.calc {
-    width: 250px;
+.calculator {
+    width: 275px;
     padding: 15px;
     border-radius: 15px;
-    background-color: #d6f5d6;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    background-color: rgb(253,246,230);
+    border: 5px solid rgb(44,49,42);
+    box-shadow: 10px 10px 0px rgba(0, 0, 0);
 }
 .display {
-    background: #ffffff;
+    background: rgb(253,246,230);
     text-align: right;
-    padding: 15px;
+    padding: 10px;
     border-radius: 10px;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
-    margin-bottom: 15px;
-    min-height: 50px;
+    margin-bottom: 30px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.current-equation {
+    font-size: 36px;
+}
+.previous-equation {
+    font-size: 16px;
+    color: rgb(145,143,128);
 }
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 61.25px;
     gap: 10px;
 }
-button {
-    padding: 15px;
-    border: none;
-    background-color: #f8f8f8;
+.buttons button {
+    width: 100%;
+    height: 100%;
+    font-family: "Poppins", sans-serif;
     font-size: 18px;
     font-weight: bold;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0);
+    background-color:rgb(253,246,230);
     border-radius: 8px;
     cursor: pointer;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.buttons-down {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns:  1fr 1fr 2.163fr;
+    grid-auto-rows: 61.25px;
+    gap: 10px;
+}
+.buttons-down button {
+    width: 100%;
+    height: 100%;
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0);
+    background-color:rgb(253,246,230);
+    border-radius: 8px;
+    cursor: pointer;
 }
 button:active {
-    background-color: #e0e0e0;
-}
-.wide {
-    grid-column: span 2;
+    background-color: rgb(184,243,215);
 }
