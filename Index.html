@@ -7,48 +7,52 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="box-w-calc">
-            <div class="calculator">
-                <div class="display">
-                    <div class="current-equation" id="current-equation">0</div>
-                    <div class="previous-equation" id="previous-equation"></div>
-                </div>
-                <div class="box-g-calc">
-                    <div class="buttons">
-                        <button onclick="clearAll()">AC</button>
-                        <button onclick="insert('%')">%</button>
-                        <button onclick="deleteLast()">DEL</button>
-                        <button onclick="insert('/')">÷</button>
-                        <button onclick="insert('1')">1</button>
-                        <button onclick="insert('2')">2</button>
-                        <button onclick="insert('3')">3</button>
-                        <button onclick="insert('*')">×</button>
-                        <button onclick="insert('4')">4</button>
-                        <button onclick="insert('5')">5</button>
-                        <button onclick="insert('6')">6</button>
-                        <button onclick="insert('+')">+</button>
-                        <button onclick="insert('7')">7</button>
-                        <button onclick="insert('8')">8</button>
-                        <button onclick="insert('9')">9</button>
-                        <button onclick="insert('-')">-</button>
+    <main class="main">
+        <section class="section__calculator">
+            <div class="calculator__box">
+                <div class="calculator">
+                    <div class="calculator__display">
+                        <div class="calculator__display--current-equation" id="current-equation">0</div>
+                        <div class="calculator__display--previous-equation" id="previous-equation"></div>
                     </div>
-                    <div class="buttons-down">
-                        <button onclick="insert('0')">0</button>
-                        <button onclick="insert('.')">,</button>
-                        <button onclick="calculate()">=</button>
+                    <div class="calculator__buttons--wrapper">
+                        <div class="calculator__buttons">
+                            <button onclick="clearAll()">AC</button>
+                            <button onclick="insert('%')">%</button>
+                            <button onclick="deleteLast()">DEL</button>
+                            <button onclick="insert('/')">÷</button>
+                            <button onclick="insert('1')">1</button>
+                            <button onclick="insert('2')">2</button>
+                            <button onclick="insert('3')">3</button>
+                            <button onclick="insert('*')">×</button>
+                            <button onclick="insert('4')">4</button>
+                            <button onclick="insert('5')">5</button>
+                            <button onclick="insert('6')">6</button>
+                            <button onclick="insert('+')">+</button>
+                            <button onclick="insert('7')">7</button>
+                            <button onclick="insert('8')">8</button>
+                            <button onclick="insert('9')">9</button>
+                            <button onclick="insert('-')">-</button>
+                        </div>
+                        <div class="calculator__buttons-down">
+                            <button onclick="insert('0')">0</button>
+                            <button onclick="insert('.')">,</button>
+                            <button onclick="calculate()">=</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="tips">
-            <p>Для ввода чисел используйте клавиатуру</p>
-            <p>Enter - вычислить</p>
-            <p>Backspace - удалить последний символ</p>
-            <p>Escape - очистить</p>
-            <p>= - вычислить</p>
-        </div>
-    </div>
+            <div class="calculator__tips--wrapper">
+                <div class="calculator__tips">
+                    <p>Для ввода чисел используйте клавиатуру</p>
+                    <p>Enter - вычислить</p>
+                    <p>Backspace - удалить последний символ</p>
+                    <p>Escape - очистить</p>
+                    <p>= - вычислить</p>
+                </div>
+            </div>
+        </section>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
